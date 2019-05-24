@@ -7,6 +7,9 @@
   <body>
     <div id="elemento">
       {{contenido}}
+      <ul>
+        <li v-for="lenguaje of lenguajes" ><a :href="lenguaje.link" target="_blank" >{{lenguaje.nombre}}</a></li>
+      </ul>
     </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -14,7 +17,12 @@
     const con=new Vue({
       el:"#elemento",
       data:{
-        contenido:"Hola mundo desde programador novato"
+        contenido:"Hola mundo desde programador novato",
+        lenguajes:[
+        {nombre:"JavaScript",link:'https://www.javascript.com'},
+        {nombre:"PHP",link:'https://php.net'},
+        {nombre:"Python",link:'https://www.python.org'}
+        ]
       }
     })
   </script>
