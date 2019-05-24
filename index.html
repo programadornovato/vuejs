@@ -7,6 +7,9 @@
   <body>
     <div id="elemento">
       {{contenido}}
+      <input type="text" v-model="nuevoLenguaje" />
+      <input type="text" v-model="nuevoLink" />
+      <button @click="agregarLenguaje" >Agregar lenguaje</button>
       <ul>
         <li v-for="lenguaje of lenguajes" ><a :href="lenguaje.link" target="_blank" >{{lenguaje.nombre}}</a></li>
       </ul>
@@ -22,8 +25,15 @@
         {nombre:"JavaScript",link:'https://www.javascript.com'},
         {nombre:"PHP",link:'https://php.net'},
         {nombre:"Python",link:'https://www.python.org'}
-        ]
-      }
+        ],
+        nuevoLenguaje:'',
+        nuevoLink:'',
+      },
+      methods: {
+        agregarLenguaje(){
+          this.lenguajes.push({nombre:this.nuevoLenguaje,link:this.nuevoLink})
+        }
+      },
     })
   </script>
 </html>
