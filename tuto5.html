@@ -3,9 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <title>Vuejs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-    <div id="elemento">
+    <div id="elemento" class="container mt-5" >
+      <div :class="['p-2', 'text-white', colorFondo]">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum non doloribus iste veniam voluptatibus, sequi id quia maxime minima, saepe eveniet autem aut? Earum non quisquam ex repellendus hic nesciunt.
+      </div>
+      <input type="text" v-model="colorFondo">
+      <div class="p-2 text-white" :class="{'bg-danger':cambioColor,'bg-primary':!cambioColor}">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum non doloribus iste veniam voluptatibus, sequi id quia maxime minima, saepe eveniet autem aut? Earum non quisquam ex repellendus hic nesciunt.
+      </div>
+      <button class="btn btn-primary" @click="cambioColor=!cambioColor" >Cambia color</button>
     </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -13,6 +22,8 @@
     const con=new Vue({
       el:"#elemento",
       data:{
+        colorFondo:'bg-primary',
+        cambioColor:false
       },
       methods: {
       }
