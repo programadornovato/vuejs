@@ -7,12 +7,17 @@
   <body>
     <div id="elemento">
       {{contenido}}
-      <input type="text" v-model="nuevoLenguaje" />
-      <input type="text" v-model="nuevoLink" />
+      <input type="text" v-model="nuevoLenguaje" @keyup.enter="agregarLenguaje" />
+      <input type="text" v-model="nuevoLink"     @keyup.enter="agregarLenguaje"/>
       <button @click="agregarLenguaje" >Agregar lenguaje</button>
       <ul>
-        <li v-for="lenguaje of lenguajes" ><a :href="lenguaje.link" target="_blank" >{{lenguaje.nombre}}</a></li>
+        <li v-for="lenguaje of lenguajes" >
+          <a :href="lenguaje.link" target="_blank" >{{lenguaje.nombre}}</a> {{ lenguaje.puntos }}
+          <button @click="lenguaje.puntos++">+</button>
+          <button @click="lenguaje.puntos--">-</button>
+        </li>
       </ul>
+      Suma de todos los votos {{sumarTodo}}
     </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -22,16 +27,28 @@
       data:{
         contenido:"Hola mundo desde programador novato",
         lenguajes:[
-        {nombre:"JavaScript",link:'https://www.javascript.com'},
-        {nombre:"PHP",link:'https://php.net'},
-        {nombre:"Python",link:'https://www.python.org'}
+        {nombre:"JavaScript",link:'https://www.javascript.com',puntos:0},
+        {nombre:"PHP",link:'https://php.net',puntos:0},
+        {nombre:"Python",link:'https://www.python.org',puntos:10}
         ],
         nuevoLenguaje:'',
         nuevoLink:'',
+        total:0
       },
       methods: {
         agregarLenguaje(){
           this.lenguajes.push({nombre:this.nuevoLenguaje,link:this.nuevoLink})
+          this.nuevoLenguaje='';
+          this.nuevoLink='';
+        }
+      },
+      computed: {
+        sumarTodo(){
+          this.total=0;
+          for(lenguaje of this.lenguajes){
+            this.total=this.total+lenguaje.puntos;
+          }
+          return this.total;
         }
       },
     })
