@@ -9,6 +9,7 @@
       {{contenido}}
       <input type="text" v-model="nuevoLenguaje" @keyup.enter="agregarLenguaje" />
       <input type="text" v-model="nuevoLink"     @keyup.enter="agregarLenguaje"/>
+      <input type="text" v-model.numer="nuevoPunto"  @keyup.enter="agregarLenguaje"/>
       <button @click="agregarLenguaje" >Agregar lenguaje</button>
       <ul>
         <li v-for="lenguaje of lenguajes" >
@@ -33,11 +34,12 @@
         ],
         nuevoLenguaje:'',
         nuevoLink:'',
+        nuevoPunto:0,
         total:0
       },
       methods: {
         agregarLenguaje(){
-          this.lenguajes.push({nombre:this.nuevoLenguaje,link:this.nuevoLink})
+          this.lenguajes.push({nombre:this.nuevoLenguaje,link:this.nuevoLink,puntos:this.nuevoPunto})
           this.nuevoLenguaje='';
           this.nuevoLink='';
         }
