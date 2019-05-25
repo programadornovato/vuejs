@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Vuejs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div id="elemento" class="container mt-5" >
+        <h3>{{texto}}</h3>
+        <h3>{{alReves}}</h3>
+        <input type="text" v-model="texto">
+        <hr>
+        <div class="progress">
+            <div 
+            class="progress-bar" 
+            role="progressbar" 
+            aria-valuenow="0" 
+            aria-valuemin="0" 
+            aria-valuemax="100"
+            :style="{width:contador+'%'}"
+            :class="tipoBarra"
+            >
+            {{contador}}
+          </div>
+        </div>
+        <button @click="contador++" class="btn btn-primary" >+</button>
+        <button @click="contador--" class="btn btn-danger" >-</button>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const con=new Vue({
+      el:"#elemento",
+      data:{
+        texto:'programador novato',
+        contador:0
+      },
+      computed: {
+        alReves(){
+          return this.texto.split('').reverse().join('');
+        },
+        tipoBarra(){
+          return {
+            'bg-success':this.contador <=10,
+            'bg-warning':this.contador >10 && this.contador <=20,
+            'bg-danger':this.contador >20
+          }
+        }
+      },
+    })
+  </script>
+</html>
