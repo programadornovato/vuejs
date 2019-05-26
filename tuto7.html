@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Vuejs</title>
+  </head>
+  <body>
+    <div id="elemento">
+        <button @click="texto='hola cambiado'">Cambiar</button>
+        <button @click="destruir()">Destruir</button>
+        {{texto}}
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const con=new Vue({
+      el:"#elemento",
+      data:{
+        texto:'hola'
+      },methods: {
+        destruir(){
+            this.$destroy();
+        }
+      },
+      beforeCreate() {
+          console.log('beforeCreate');
+          console.log(this.texto);
+      },
+      created() {
+        console.log('created');
+        console.log(this.texto);
+      },
+      beforeMount() {
+          console.log('beforeMount');
+      },
+      mounted() {
+        console.log('mounted');
+      },
+      beforeUpdate() {
+        console.log('beforeUpdate');  
+      },
+      updated() {
+        console.log('updated');  
+      },
+      beforeDestroy() {
+          console.log('beforeDestroy');
+      },
+      destroyed() {
+        console.log('destroyed');
+      },
+    })
+  </script>
+</html>
