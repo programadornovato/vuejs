@@ -12,31 +12,46 @@
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
+    // PADRE
       Vue.component('padre',{
           template: //html
           `
             <div class='p-5 bg-dark text-white' >
                 <h2>PAPA {{numeroPadre}}</h2>
+                <h2>HIJO {{nombreHijo}}</h2>
+                
                 <button class="btn btn-danger" @click="numeroPadre++" >+</button>
-                <hijo :numero=numeroPadre></hijo>
+                
+                <hijo :numero=numeroPadre @nombreHijo="nombreHijo=$event" ></hijo>
             </div>
           `,
           data(){
               return{
-                numeroPadre:10
+                numeroPadre:10,
+                nombreHijo:''
               }
           }
       });
-
+      // HIJO
       Vue.component('hijo',{
           template: //html
           `
             <div class='p-5 bg-success text-white' >
                 HIJO 
                 <h2>{{numero}}</h2>
+                <button @click=numero++ >+</button>
+                <h2>{{nombreHijo}}</h2>
             </div>
           `,
-          props:['numero']
+          props:['numero'],
+          data(){
+            return{
+              nombreHijo:'Pepito2'
+            }
+          },
+          mounted() {
+            this.$emit('nombreHijo',this.nombreHijo);
+          },
       });
 
     const con=new Vue({
