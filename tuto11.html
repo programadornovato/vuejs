@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Vuejs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div id="elemento" class="container">
+        <padre></padre>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vuex@3.1.1/dist/vuex.js"></script>
+
+  <script>
+    // PADRE
+      Vue.component('padre',{
+          template: //html
+          `
+          <div class="p-5 bg-dark text-white">
+            <button @click="$store.commit('suma')" >+</button>
+            <h2> numero {{$store.state.numero}} </h2>
+            <hijo></hijo>
+          </div>
+          `
+      });
+      // HIJO
+      Vue.component('hijo',{
+          template: //html
+          `
+          <div class="p-5 bg-success text-white">
+            <button @click="$store.commit('suma')" >+</button>
+            <h2> numero {{$store.state.numero}} </h2>
+          </div>
+          `
+      });
+      const store=new Vuex.Store({
+          state:{
+              numero:5
+          },
+          mutations:{
+              suma(state){
+                state.numero++;
+              }
+          }
+      });
+    const con=new Vue({
+      el:"#elemento",
+      store:store
+    });
+  </script>
+</html>
