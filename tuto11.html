@@ -20,10 +20,21 @@
           `
           <div class="p-5 bg-dark text-white">
             <button @click="$store.commit('suma')" >+</button>
-            <h2> numero {{$store.state.numero}} </h2>
+            <h2> numero {{numero}} </h2>
+            <h2> edad {{edad}} </h2>
             <hijo></hijo>
           </div>
-          `
+          `,computed: {
+            ...Vuex.mapState(['edad','numero'])
+            /*
+            numero(){
+              return store.state.numero;
+            },
+            edad(){
+              return store.state.edad;
+            }
+            */
+          },
       });
       // HIJO
       Vue.component('hijo',{
@@ -31,13 +42,25 @@
           `
           <div class="p-5 bg-success text-white">
             <button @click="$store.commit('suma')" >+</button>
-            <h2> numero {{$store.state.numero}} </h2>
+            <h2> numero {{numero}} </h2>
           </div>
-          `
+          `,
+          computed: {
+            ...Vuex.mapState(['edad','numero'])
+            /*
+            numero(){
+              return store.state.numero;
+            },
+            edad(){
+              return store.state.edad;
+            }
+            */
+          }
       });
       const store=new Vuex.Store({
           state:{
-              numero:5
+            numero:5,
+            edad:9
           },
           mutations:{
               suma(state){
