@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Vuejs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div id="elemento" class="container">
+        <padre></padre>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vuex@3.1.1/dist/vuex.js"></script>
+
+  <script>
+      // PADRE
+      Vue.component('padre',{
+          template: //html
+          `
+          <div class="p-5 bg-success text-white">
+            <button @click="getLengujes" >Carga Lenguajes</button>
+            <ul>
+                <li v-for="leguaje of leguajes" >{{leguaje.nombre}}</li>
+            </ul>
+          </div>
+          `,
+          computed:{
+              ...Vuex.mapState(['leguajes'])
+          }
+          ,
+          methods:{
+              ...Vuex.mapActions(['getLengujes'])
+          }
+      });
+      const store=new Vuex.Store({
+          state:{
+            leguajes:[]
+          },
+          mutations:{
+            cargaLenguajes(state,leguajes){
+                state.leguajes=leguajes;
+            }
+          },
+          actions:{
+            getLengujes: async function({commit}){
+                const datos = await fetch("datos.js");
+                const leguajes= await datos.json();
+                commit('cargaLenguajes',leguajes);
+            }
+          }
+      });
+    const con=new Vue({
+      el:"#elemento",
+      store:store
+    });
+  </script>
+</html>
