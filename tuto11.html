@@ -19,43 +19,35 @@
           template: //html
           `
           <div class="p-5 bg-dark text-white">
-            <button @click="$store.commit('suma')" >+</button>
+            <button @click="suma" >+</button>
+            <button @click="resta(2)" >-</button>
             <h2> numero {{numero}} </h2>
             <h2> edad {{edad}} </h2>
             <hijo></hijo>
           </div>
           `,computed: {
             ...Vuex.mapState(['edad','numero'])
-            /*
-            numero(){
-              return store.state.numero;
-            },
-            edad(){
-              return store.state.edad;
-            }
-            */
           },
+          methods: {
+            ...Vuex.mapMutations(['suma','resta'])
+          }
       });
       // HIJO
       Vue.component('hijo',{
           template: //html
           `
           <div class="p-5 bg-success text-white">
-            <button @click="$store.commit('suma')" >+</button>
+            <button @click="suma" >+</button>
+            <button @click="resta(2)" >-</button>
             <h2> numero {{numero}} </h2>
           </div>
           `,
           computed: {
             ...Vuex.mapState(['edad','numero'])
-            /*
-            numero(){
-              return store.state.numero;
-            },
-            edad(){
-              return store.state.edad;
-            }
-            */
-          }
+          },
+          methods: {
+            ...Vuex.mapMutations(['suma','resta'])
+          },
       });
       const store=new Vuex.Store({
           state:{
@@ -63,9 +55,12 @@
             edad:9
           },
           mutations:{
-              suma(state){
+            suma(state){
                 state.numero++;
-              }
+              },
+            resta(state,n){
+              state.numero=state.numero-n;
+            }
           }
       });
     const con=new Vue({
